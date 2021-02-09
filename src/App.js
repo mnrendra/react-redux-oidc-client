@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { connect } /* ----------- */ from 'react-redux'
+import { Route, Switch } /* ----- */ from 'react-router'
+import { ConnectedRouter } /* --- */ from 'connected-react-router'
 
-function App() {
+import Callback /* -------------- */ from './oidc/Callback'
+import history /* --------------- */ from './oidc/history'
+
+import Home /* ------------------ */ from './components/Home'
+// import ProtectedRoute /* ------- */ from './components/ProtectedRoute'
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <ConnectedRouter history={history}>
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/callback' component={Callback} />
+          {/* <ProtectedRoute path='/dashboard' ProtectedComponent={Dashboard} /> */}
+        </Switch>
+      </ConnectedRouter>
     </div>
-  );
+  )
 }
 
-export default App;
+export default connect(null, null)(App)
